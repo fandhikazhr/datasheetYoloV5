@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <gui>
+      <camera name="user_camera">
+        <pose>20 10 3 0 1.5 0</pose>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>-1</real_time_update_rate>
+      <!--<max_step_size>0.0020</max_step_size>-->
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>50</mu>
+                <mu2>25</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+
+        <visual name="grass">
+          <pose>0 0 -0.1 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+        
+        <visual name="visual">
+         <pose>10 10 -0.1 0 0 0</pose>
+         <geometry>
+          <cylinder>
+           <radius>0.15</radius> <!-- Radius tabung -->
+           <length>0.4</length> <!-- Tinggi tabung -->
+          </cylinder>
+         </geometry>
+         <material>
+          <ambient>0.8 0.4 0.0 1</ambient> <!-- Warna oranye  (pencahayaan) -->
+          <diffuse>1.0 0.5 0.0 1</diffuse> <!-- Warna utama oranye -->
+          <specular>0.1 0.1 0.1 1</specular> <!-- Refleksi -->
+          <emissive>0.0 0.0 0.0 1</emissive> <!-- Cahaya yang dipancarkan -->
+         </material>
+        </visual>
+        
+        <visual name="visual2">
+         <pose>20 10 -0.1 0 0 0</pose>
+         <geometry>
+          <cylinder>
+           <radius>0.06</radius> <!-- Radius tabung -->
+           <length>0.3</length> <!-- Tinggi tabung -->
+          </cylinder>
+         </geometry>
+         <material>
+          <ambient>0.8 0.4 0.0 1</ambient> <!-- Warna oranye  (pencahayaan) -->
+          <diffuse>1.0 0.5 0.0 1</diffuse> <!-- Warna utama oranye -->
+          <specular>0.1 0.1 0.1 1</specular> <!-- Refleksi -->
+          <emissive>0.0 0.0 0.0 1</emissive> <!-- Cahaya yang dipancarkan -->
+         </material>
+        </visual>
+
+      </link>
+    </model>
+
+  </world>
+</sdf>
